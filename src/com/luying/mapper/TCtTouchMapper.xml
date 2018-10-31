@@ -1,0 +1,1129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.luying.dao.TCtTouchMapper" >
+
+    <resultMap id="BaseResultMap" type="com.luying.pojo.TCtTouch" >
+        <id column="touch_id" property="touchId" jdbcType="BIGINT" />
+        <result column="crt_user_id" property="crtUserId" jdbcType="BIGINT" />
+        <result column="crt_time" property="crtTime" jdbcType="TIMESTAMP" />
+        <result column="crt_app_sys_id" property="crtAppSysId" jdbcType="VARCHAR" />
+        <result column="modf_user_id" property="modfUserId" jdbcType="BIGINT" />
+        <result column="modf_time" property="modfTime" jdbcType="TIMESTAMP" />
+        <result column="modf_app_sys_id" property="modfAppSysId" jdbcType="VARCHAR" />
+        <result column="samp_id" property="sampId" jdbcType="BIGINT" />
+        <result column="task_id" property="taskId" jdbcType="BIGINT" />
+        <result column="task_qualify_id" property="taskQualifyId" jdbcType="BIGINT" />
+        <result column="seat_id" property="seatId" jdbcType="BIGINT" />
+        <result column="cti_agent_id" property="ctiAgentId" jdbcType="VARCHAR" />
+        <result column="sp_org_id" property="spOrgId" jdbcType="BIGINT" />
+        <result column="er_org_id" property="erOrgId" jdbcType="BIGINT" />
+        <result column="touch_mode_cd" property="touchModeCd" jdbcType="CHAR" />
+        <result column="touch_bgn_time" property="touchBgnTime" jdbcType="TIMESTAMP" />
+        <result column="touch_finish_time" property="touchFinishTime" jdbcType="TIMESTAMP" />
+        <result column="call_seat_mark_cntt" property="callSeatMarkCntt" jdbcType="VARCHAR" />
+        <result column="call_mark_cntt" property="callMarkCntt" jdbcType="VARCHAR" />
+        <result column="op_agent_id" property="opAgentId" jdbcType="VARCHAR" />
+        <result column="agent_dn" property="agentDn" jdbcType="VARCHAR" />
+        <result column="service_direct" property="serviceDirect" jdbcType="VARCHAR" />
+        <result column="calling_num" property="callingNum" jdbcType="VARCHAR" />
+        <result column="called_num" property="calledNum" jdbcType="VARCHAR" />
+        <result column="called_cust_num" property="calledCustNum" jdbcType="VARCHAR" />
+        <result column="called_cust_name" property="calledCustName" jdbcType="VARCHAR" />
+        <result column="orig_calling_num" property="origCallingNum" jdbcType="VARCHAR" />
+        <result column="orig_called_num" property="origCalledNum" jdbcType="VARCHAR" />
+        <result column="lnup_tmlen_sec_cnt" property="lnupTmlenSecCnt" jdbcType="DECIMAL" />
+        <result column="ring_tmlen_sec_cnt" property="ringTmlenSecCnt" jdbcType="DECIMAL" />
+        <result column="cnvst_tmlen_sec_cnt" property="cnvstTmlenSecCnt" jdbcType="DECIMAL" />
+        <result column="onhook_type_cd" property="onhookTypeCd" jdbcType="VARCHAR" />
+        <result column="call_trace_cntt" property="callTraceCntt" jdbcType="VARCHAR" />
+        <result column="ivr_key_value" property="ivrKeyValue" jdbcType="VARCHAR" />
+        <result column="rcd_crt_time" property="rcdCrtTime" jdbcType="TIMESTAMP" />
+        <result column="rcd_file_nm" property="rcdFileNm" jdbcType="VARCHAR" />
+        <result column="rcd_file_save_path" property="rcdFileSavePath" jdbcType="VARCHAR" />
+        <result column="rcd_file_svr_url_path" property="rcdFileSvrUrlPath" jdbcType="VARCHAR" />
+        <result column="rcd_bgn_time" property="rcdBgnTime" jdbcType="TIMESTAMP" />
+        <result column="rcd_finish_time" property="rcdFinishTime" jdbcType="TIMESTAMP" />
+        <result column="rcd_tmlen_sec_cnt" property="rcdTmlenSecCnt" jdbcType="DECIMAL" />
+        <result column="ms_server" property="msServer" jdbcType="VARCHAR" />
+        <result column="connect_state" property="connectState" jdbcType="CHAR" />
+        <result column="er_org_calling_num_id" property="erOrgCallingNumId" jdbcType="BIGINT" />
+        <result column="telephone_number" property="telephoneNumber" jdbcType="VARCHAR" />
+        <result column="task_calling_num" property="taskCallingNum" jdbcType="VARCHAR" />
+        <result column="disconnect_type" property="disconnectType" jdbcType="TINYINT" />
+        <result column="ring_time" property="ringTime" jdbcType="TIMESTAMP" />
+        <result column="area_code" property="areaCode" jdbcType="VARCHAR" />
+        <result column="auto_task_id" property="autoTaskId" jdbcType="VARCHAR" />
+        <result column="user_alert_time" property="userAlertTime" jdbcType="SMALLINT" />
+        <result column="agent_alert_time" property="agentAlertTime" jdbcType="SMALLINT" />
+        <result column="quality_extract_state" property="qualityExtractState" jdbcType="CHAR" />
+        <result column="version" property="version" jdbcType="INTEGER" />
+        <result column="er_org_name" property="erOrgName" jdbcType="VARCHAR" />
+        <result column="er_org_code" property="erOrgCode" jdbcType="VARCHAR" />
+        <result column="sp_org_name" property="spOrgName" jdbcType="VARCHAR" />
+        <result column="sp_org_code" property="spOrgCode" jdbcType="VARCHAR" />
+        <result column="seat_real_name" property="seatRealName" jdbcType="VARCHAR" />
+        <result column="seat_code" property="seatCode" jdbcType="VARCHAR" />
+        <result column="task_name" property="taskName" jdbcType="VARCHAR" />
+        <result column="task_code" property="taskCode" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        touch_id, crt_user_id, crt_time, crt_app_sys_id, modf_user_id, modf_time, modf_app_sys_id, 
+        samp_id, task_id, task_qualify_id, seat_id, cti_agent_id, sp_org_id, er_org_id, touch_mode_cd, 
+        touch_bgn_time, touch_finish_time, call_seat_mark_cntt, call_mark_cntt, op_agent_id, 
+        agent_dn, service_direct, calling_num, called_num, called_cust_num, called_cust_name, 
+        orig_calling_num, orig_called_num, lnup_tmlen_sec_cnt, ring_tmlen_sec_cnt, cnvst_tmlen_sec_cnt, 
+        onhook_type_cd, call_trace_cntt, ivr_key_value, rcd_crt_time, rcd_file_nm, rcd_file_save_path, 
+        rcd_file_svr_url_path, rcd_bgn_time, rcd_finish_time, rcd_tmlen_sec_cnt, ms_server, 
+        connect_state, er_org_calling_num_id, telephone_number, task_calling_num, disconnect_type, 
+        ring_time, area_code, auto_task_id, user_alert_time, agent_alert_time, quality_extract_state, 
+        version, er_org_name, er_org_code, sp_org_name, sp_org_code, seat_real_name, seat_code, 
+        task_name, task_code
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.luying.pojo.TCtTouchExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from t_ct_touch
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_ct_touch
+        where touch_id = #{touchId,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from t_ct_touch
+        where touch_id = #{touchId,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.luying.pojo.TCtTouchExample" >
+        delete from t_ct_touch
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.luying.pojo.TCtTouch" >
+        insert into t_ct_touch (touch_id, crt_user_id, crt_time, 
+            crt_app_sys_id, modf_user_id, modf_time, 
+            modf_app_sys_id, samp_id, task_id, 
+            task_qualify_id, seat_id, cti_agent_id, 
+            sp_org_id, er_org_id, touch_mode_cd, 
+            touch_bgn_time, touch_finish_time, call_seat_mark_cntt, 
+            call_mark_cntt, op_agent_id, agent_dn, 
+            service_direct, calling_num, called_num, 
+            called_cust_num, called_cust_name, orig_calling_num, 
+            orig_called_num, lnup_tmlen_sec_cnt, ring_tmlen_sec_cnt, 
+            cnvst_tmlen_sec_cnt, onhook_type_cd, call_trace_cntt, 
+            ivr_key_value, rcd_crt_time, rcd_file_nm, 
+            rcd_file_save_path, rcd_file_svr_url_path, rcd_bgn_time, 
+            rcd_finish_time, rcd_tmlen_sec_cnt, ms_server, 
+            connect_state, er_org_calling_num_id, telephone_number, 
+            task_calling_num, disconnect_type, ring_time, 
+            area_code, auto_task_id, user_alert_time, 
+            agent_alert_time, quality_extract_state, version, 
+            er_org_name, er_org_code, sp_org_name, 
+            sp_org_code, seat_real_name, seat_code, 
+            task_name, task_code)
+        values (#{touchId,jdbcType=BIGINT}, #{crtUserId,jdbcType=BIGINT}, #{crtTime,jdbcType=TIMESTAMP}, 
+            #{crtAppSysId,jdbcType=VARCHAR}, #{modfUserId,jdbcType=BIGINT}, #{modfTime,jdbcType=TIMESTAMP}, 
+            #{modfAppSysId,jdbcType=VARCHAR}, #{sampId,jdbcType=BIGINT}, #{taskId,jdbcType=BIGINT}, 
+            #{taskQualifyId,jdbcType=BIGINT}, #{seatId,jdbcType=BIGINT}, #{ctiAgentId,jdbcType=VARCHAR}, 
+            #{spOrgId,jdbcType=BIGINT}, #{erOrgId,jdbcType=BIGINT}, #{touchModeCd,jdbcType=CHAR}, 
+            #{touchBgnTime,jdbcType=TIMESTAMP}, #{touchFinishTime,jdbcType=TIMESTAMP}, #{callSeatMarkCntt,jdbcType=VARCHAR}, 
+            #{callMarkCntt,jdbcType=VARCHAR}, #{opAgentId,jdbcType=VARCHAR}, #{agentDn,jdbcType=VARCHAR}, 
+            #{serviceDirect,jdbcType=VARCHAR}, #{callingNum,jdbcType=VARCHAR}, #{calledNum,jdbcType=VARCHAR}, 
+            #{calledCustNum,jdbcType=VARCHAR}, #{calledCustName,jdbcType=VARCHAR}, #{origCallingNum,jdbcType=VARCHAR}, 
+            #{origCalledNum,jdbcType=VARCHAR}, #{lnupTmlenSecCnt,jdbcType=DECIMAL}, #{ringTmlenSecCnt,jdbcType=DECIMAL}, 
+            #{cnvstTmlenSecCnt,jdbcType=DECIMAL}, #{onhookTypeCd,jdbcType=VARCHAR}, #{callTraceCntt,jdbcType=VARCHAR}, 
+            #{ivrKeyValue,jdbcType=VARCHAR}, #{rcdCrtTime,jdbcType=TIMESTAMP}, #{rcdFileNm,jdbcType=VARCHAR}, 
+            #{rcdFileSavePath,jdbcType=VARCHAR}, #{rcdFileSvrUrlPath,jdbcType=VARCHAR}, #{rcdBgnTime,jdbcType=TIMESTAMP}, 
+            #{rcdFinishTime,jdbcType=TIMESTAMP}, #{rcdTmlenSecCnt,jdbcType=DECIMAL}, #{msServer,jdbcType=VARCHAR}, 
+            #{connectState,jdbcType=CHAR}, #{erOrgCallingNumId,jdbcType=BIGINT}, #{telephoneNumber,jdbcType=VARCHAR}, 
+            #{taskCallingNum,jdbcType=VARCHAR}, #{disconnectType,jdbcType=TINYINT}, #{ringTime,jdbcType=TIMESTAMP}, 
+            #{areaCode,jdbcType=VARCHAR}, #{autoTaskId,jdbcType=VARCHAR}, #{userAlertTime,jdbcType=SMALLINT}, 
+            #{agentAlertTime,jdbcType=SMALLINT}, #{qualityExtractState,jdbcType=CHAR}, #{version,jdbcType=INTEGER}, 
+            #{erOrgName,jdbcType=VARCHAR}, #{erOrgCode,jdbcType=VARCHAR}, #{spOrgName,jdbcType=VARCHAR}, 
+            #{spOrgCode,jdbcType=VARCHAR}, #{seatRealName,jdbcType=VARCHAR}, #{seatCode,jdbcType=VARCHAR}, 
+            #{taskName,jdbcType=VARCHAR}, #{taskCode,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.luying.pojo.TCtTouch" >
+        insert into t_ct_touch
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="touchId != null" >
+                touch_id,
+            </if>
+            <if test="crtUserId != null" >
+                crt_user_id,
+            </if>
+            <if test="crtTime != null" >
+                crt_time,
+            </if>
+            <if test="crtAppSysId != null" >
+                crt_app_sys_id,
+            </if>
+            <if test="modfUserId != null" >
+                modf_user_id,
+            </if>
+            <if test="modfTime != null" >
+                modf_time,
+            </if>
+            <if test="modfAppSysId != null" >
+                modf_app_sys_id,
+            </if>
+            <if test="sampId != null" >
+                samp_id,
+            </if>
+            <if test="taskId != null" >
+                task_id,
+            </if>
+            <if test="taskQualifyId != null" >
+                task_qualify_id,
+            </if>
+            <if test="seatId != null" >
+                seat_id,
+            </if>
+            <if test="ctiAgentId != null" >
+                cti_agent_id,
+            </if>
+            <if test="spOrgId != null" >
+                sp_org_id,
+            </if>
+            <if test="erOrgId != null" >
+                er_org_id,
+            </if>
+            <if test="touchModeCd != null" >
+                touch_mode_cd,
+            </if>
+            <if test="touchBgnTime != null" >
+                touch_bgn_time,
+            </if>
+            <if test="touchFinishTime != null" >
+                touch_finish_time,
+            </if>
+            <if test="callSeatMarkCntt != null" >
+                call_seat_mark_cntt,
+            </if>
+            <if test="callMarkCntt != null" >
+                call_mark_cntt,
+            </if>
+            <if test="opAgentId != null" >
+                op_agent_id,
+            </if>
+            <if test="agentDn != null" >
+                agent_dn,
+            </if>
+            <if test="serviceDirect != null" >
+                service_direct,
+            </if>
+            <if test="callingNum != null" >
+                calling_num,
+            </if>
+            <if test="calledNum != null" >
+                called_num,
+            </if>
+            <if test="calledCustNum != null" >
+                called_cust_num,
+            </if>
+            <if test="calledCustName != null" >
+                called_cust_name,
+            </if>
+            <if test="origCallingNum != null" >
+                orig_calling_num,
+            </if>
+            <if test="origCalledNum != null" >
+                orig_called_num,
+            </if>
+            <if test="lnupTmlenSecCnt != null" >
+                lnup_tmlen_sec_cnt,
+            </if>
+            <if test="ringTmlenSecCnt != null" >
+                ring_tmlen_sec_cnt,
+            </if>
+            <if test="cnvstTmlenSecCnt != null" >
+                cnvst_tmlen_sec_cnt,
+            </if>
+            <if test="onhookTypeCd != null" >
+                onhook_type_cd,
+            </if>
+            <if test="callTraceCntt != null" >
+                call_trace_cntt,
+            </if>
+            <if test="ivrKeyValue != null" >
+                ivr_key_value,
+            </if>
+            <if test="rcdCrtTime != null" >
+                rcd_crt_time,
+            </if>
+            <if test="rcdFileNm != null" >
+                rcd_file_nm,
+            </if>
+            <if test="rcdFileSavePath != null" >
+                rcd_file_save_path,
+            </if>
+            <if test="rcdFileSvrUrlPath != null" >
+                rcd_file_svr_url_path,
+            </if>
+            <if test="rcdBgnTime != null" >
+                rcd_bgn_time,
+            </if>
+            <if test="rcdFinishTime != null" >
+                rcd_finish_time,
+            </if>
+            <if test="rcdTmlenSecCnt != null" >
+                rcd_tmlen_sec_cnt,
+            </if>
+            <if test="msServer != null" >
+                ms_server,
+            </if>
+            <if test="connectState != null" >
+                connect_state,
+            </if>
+            <if test="erOrgCallingNumId != null" >
+                er_org_calling_num_id,
+            </if>
+            <if test="telephoneNumber != null" >
+                telephone_number,
+            </if>
+            <if test="taskCallingNum != null" >
+                task_calling_num,
+            </if>
+            <if test="disconnectType != null" >
+                disconnect_type,
+            </if>
+            <if test="ringTime != null" >
+                ring_time,
+            </if>
+            <if test="areaCode != null" >
+                area_code,
+            </if>
+            <if test="autoTaskId != null" >
+                auto_task_id,
+            </if>
+            <if test="userAlertTime != null" >
+                user_alert_time,
+            </if>
+            <if test="agentAlertTime != null" >
+                agent_alert_time,
+            </if>
+            <if test="qualityExtractState != null" >
+                quality_extract_state,
+            </if>
+            <if test="version != null" >
+                version,
+            </if>
+            <if test="erOrgName != null" >
+                er_org_name,
+            </if>
+            <if test="erOrgCode != null" >
+                er_org_code,
+            </if>
+            <if test="spOrgName != null" >
+                sp_org_name,
+            </if>
+            <if test="spOrgCode != null" >
+                sp_org_code,
+            </if>
+            <if test="seatRealName != null" >
+                seat_real_name,
+            </if>
+            <if test="seatCode != null" >
+                seat_code,
+            </if>
+            <if test="taskName != null" >
+                task_name,
+            </if>
+            <if test="taskCode != null" >
+                task_code,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="touchId != null" >
+                #{touchId,jdbcType=BIGINT},
+            </if>
+            <if test="crtUserId != null" >
+                #{crtUserId,jdbcType=BIGINT},
+            </if>
+            <if test="crtTime != null" >
+                #{crtTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="crtAppSysId != null" >
+                #{crtAppSysId,jdbcType=VARCHAR},
+            </if>
+            <if test="modfUserId != null" >
+                #{modfUserId,jdbcType=BIGINT},
+            </if>
+            <if test="modfTime != null" >
+                #{modfTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modfAppSysId != null" >
+                #{modfAppSysId,jdbcType=VARCHAR},
+            </if>
+            <if test="sampId != null" >
+                #{sampId,jdbcType=BIGINT},
+            </if>
+            <if test="taskId != null" >
+                #{taskId,jdbcType=BIGINT},
+            </if>
+            <if test="taskQualifyId != null" >
+                #{taskQualifyId,jdbcType=BIGINT},
+            </if>
+            <if test="seatId != null" >
+                #{seatId,jdbcType=BIGINT},
+            </if>
+            <if test="ctiAgentId != null" >
+                #{ctiAgentId,jdbcType=VARCHAR},
+            </if>
+            <if test="spOrgId != null" >
+                #{spOrgId,jdbcType=BIGINT},
+            </if>
+            <if test="erOrgId != null" >
+                #{erOrgId,jdbcType=BIGINT},
+            </if>
+            <if test="touchModeCd != null" >
+                #{touchModeCd,jdbcType=CHAR},
+            </if>
+            <if test="touchBgnTime != null" >
+                #{touchBgnTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="touchFinishTime != null" >
+                #{touchFinishTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="callSeatMarkCntt != null" >
+                #{callSeatMarkCntt,jdbcType=VARCHAR},
+            </if>
+            <if test="callMarkCntt != null" >
+                #{callMarkCntt,jdbcType=VARCHAR},
+            </if>
+            <if test="opAgentId != null" >
+                #{opAgentId,jdbcType=VARCHAR},
+            </if>
+            <if test="agentDn != null" >
+                #{agentDn,jdbcType=VARCHAR},
+            </if>
+            <if test="serviceDirect != null" >
+                #{serviceDirect,jdbcType=VARCHAR},
+            </if>
+            <if test="callingNum != null" >
+                #{callingNum,jdbcType=VARCHAR},
+            </if>
+            <if test="calledNum != null" >
+                #{calledNum,jdbcType=VARCHAR},
+            </if>
+            <if test="calledCustNum != null" >
+                #{calledCustNum,jdbcType=VARCHAR},
+            </if>
+            <if test="calledCustName != null" >
+                #{calledCustName,jdbcType=VARCHAR},
+            </if>
+            <if test="origCallingNum != null" >
+                #{origCallingNum,jdbcType=VARCHAR},
+            </if>
+            <if test="origCalledNum != null" >
+                #{origCalledNum,jdbcType=VARCHAR},
+            </if>
+            <if test="lnupTmlenSecCnt != null" >
+                #{lnupTmlenSecCnt,jdbcType=DECIMAL},
+            </if>
+            <if test="ringTmlenSecCnt != null" >
+                #{ringTmlenSecCnt,jdbcType=DECIMAL},
+            </if>
+            <if test="cnvstTmlenSecCnt != null" >
+                #{cnvstTmlenSecCnt,jdbcType=DECIMAL},
+            </if>
+            <if test="onhookTypeCd != null" >
+                #{onhookTypeCd,jdbcType=VARCHAR},
+            </if>
+            <if test="callTraceCntt != null" >
+                #{callTraceCntt,jdbcType=VARCHAR},
+            </if>
+            <if test="ivrKeyValue != null" >
+                #{ivrKeyValue,jdbcType=VARCHAR},
+            </if>
+            <if test="rcdCrtTime != null" >
+                #{rcdCrtTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="rcdFileNm != null" >
+                #{rcdFileNm,jdbcType=VARCHAR},
+            </if>
+            <if test="rcdFileSavePath != null" >
+                #{rcdFileSavePath,jdbcType=VARCHAR},
+            </if>
+            <if test="rcdFileSvrUrlPath != null" >
+                #{rcdFileSvrUrlPath,jdbcType=VARCHAR},
+            </if>
+            <if test="rcdBgnTime != null" >
+                #{rcdBgnTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="rcdFinishTime != null" >
+                #{rcdFinishTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="rcdTmlenSecCnt != null" >
+                #{rcdTmlenSecCnt,jdbcType=DECIMAL},
+            </if>
+            <if test="msServer != null" >
+                #{msServer,jdbcType=VARCHAR},
+            </if>
+            <if test="connectState != null" >
+                #{connectState,jdbcType=CHAR},
+            </if>
+            <if test="erOrgCallingNumId != null" >
+                #{erOrgCallingNumId,jdbcType=BIGINT},
+            </if>
+            <if test="telephoneNumber != null" >
+                #{telephoneNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="taskCallingNum != null" >
+                #{taskCallingNum,jdbcType=VARCHAR},
+            </if>
+            <if test="disconnectType != null" >
+                #{disconnectType,jdbcType=TINYINT},
+            </if>
+            <if test="ringTime != null" >
+                #{ringTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="areaCode != null" >
+                #{areaCode,jdbcType=VARCHAR},
+            </if>
+            <if test="autoTaskId != null" >
+                #{autoTaskId,jdbcType=VARCHAR},
+            </if>
+            <if test="userAlertTime != null" >
+                #{userAlertTime,jdbcType=SMALLINT},
+            </if>
+            <if test="agentAlertTime != null" >
+                #{agentAlertTime,jdbcType=SMALLINT},
+            </if>
+            <if test="qualityExtractState != null" >
+                #{qualityExtractState,jdbcType=CHAR},
+            </if>
+            <if test="version != null" >
+                #{version,jdbcType=INTEGER},
+            </if>
+            <if test="erOrgName != null" >
+                #{erOrgName,jdbcType=VARCHAR},
+            </if>
+            <if test="erOrgCode != null" >
+                #{erOrgCode,jdbcType=VARCHAR},
+            </if>
+            <if test="spOrgName != null" >
+                #{spOrgName,jdbcType=VARCHAR},
+            </if>
+            <if test="spOrgCode != null" >
+                #{spOrgCode,jdbcType=VARCHAR},
+            </if>
+            <if test="seatRealName != null" >
+                #{seatRealName,jdbcType=VARCHAR},
+            </if>
+            <if test="seatCode != null" >
+                #{seatCode,jdbcType=VARCHAR},
+            </if>
+            <if test="taskName != null" >
+                #{taskName,jdbcType=VARCHAR},
+            </if>
+            <if test="taskCode != null" >
+                #{taskCode,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.luying.pojo.TCtTouchExample" resultType="java.lang.Integer" >
+        select count(*) from t_ct_touch
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update t_ct_touch
+        <set >
+            <if test="record.touchId != null" >
+                touch_id = #{record.touchId,jdbcType=BIGINT},
+            </if>
+            <if test="record.crtUserId != null" >
+                crt_user_id = #{record.crtUserId,jdbcType=BIGINT},
+            </if>
+            <if test="record.crtTime != null" >
+                crt_time = #{record.crtTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.crtAppSysId != null" >
+                crt_app_sys_id = #{record.crtAppSysId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.modfUserId != null" >
+                modf_user_id = #{record.modfUserId,jdbcType=BIGINT},
+            </if>
+            <if test="record.modfTime != null" >
+                modf_time = #{record.modfTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.modfAppSysId != null" >
+                modf_app_sys_id = #{record.modfAppSysId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sampId != null" >
+                samp_id = #{record.sampId,jdbcType=BIGINT},
+            </if>
+            <if test="record.taskId != null" >
+                task_id = #{record.taskId,jdbcType=BIGINT},
+            </if>
+            <if test="record.taskQualifyId != null" >
+                task_qualify_id = #{record.taskQualifyId,jdbcType=BIGINT},
+            </if>
+            <if test="record.seatId != null" >
+                seat_id = #{record.seatId,jdbcType=BIGINT},
+            </if>
+            <if test="record.ctiAgentId != null" >
+                cti_agent_id = #{record.ctiAgentId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.spOrgId != null" >
+                sp_org_id = #{record.spOrgId,jdbcType=BIGINT},
+            </if>
+            <if test="record.erOrgId != null" >
+                er_org_id = #{record.erOrgId,jdbcType=BIGINT},
+            </if>
+            <if test="record.touchModeCd != null" >
+                touch_mode_cd = #{record.touchModeCd,jdbcType=CHAR},
+            </if>
+            <if test="record.touchBgnTime != null" >
+                touch_bgn_time = #{record.touchBgnTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.touchFinishTime != null" >
+                touch_finish_time = #{record.touchFinishTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.callSeatMarkCntt != null" >
+                call_seat_mark_cntt = #{record.callSeatMarkCntt,jdbcType=VARCHAR},
+            </if>
+            <if test="record.callMarkCntt != null" >
+                call_mark_cntt = #{record.callMarkCntt,jdbcType=VARCHAR},
+            </if>
+            <if test="record.opAgentId != null" >
+                op_agent_id = #{record.opAgentId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.agentDn != null" >
+                agent_dn = #{record.agentDn,jdbcType=VARCHAR},
+            </if>
+            <if test="record.serviceDirect != null" >
+                service_direct = #{record.serviceDirect,jdbcType=VARCHAR},
+            </if>
+            <if test="record.callingNum != null" >
+                calling_num = #{record.callingNum,jdbcType=VARCHAR},
+            </if>
+            <if test="record.calledNum != null" >
+                called_num = #{record.calledNum,jdbcType=VARCHAR},
+            </if>
+            <if test="record.calledCustNum != null" >
+                called_cust_num = #{record.calledCustNum,jdbcType=VARCHAR},
+            </if>
+            <if test="record.calledCustName != null" >
+                called_cust_name = #{record.calledCustName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.origCallingNum != null" >
+                orig_calling_num = #{record.origCallingNum,jdbcType=VARCHAR},
+            </if>
+            <if test="record.origCalledNum != null" >
+                orig_called_num = #{record.origCalledNum,jdbcType=VARCHAR},
+            </if>
+            <if test="record.lnupTmlenSecCnt != null" >
+                lnup_tmlen_sec_cnt = #{record.lnupTmlenSecCnt,jdbcType=DECIMAL},
+            </if>
+            <if test="record.ringTmlenSecCnt != null" >
+                ring_tmlen_sec_cnt = #{record.ringTmlenSecCnt,jdbcType=DECIMAL},
+            </if>
+            <if test="record.cnvstTmlenSecCnt != null" >
+                cnvst_tmlen_sec_cnt = #{record.cnvstTmlenSecCnt,jdbcType=DECIMAL},
+            </if>
+            <if test="record.onhookTypeCd != null" >
+                onhook_type_cd = #{record.onhookTypeCd,jdbcType=VARCHAR},
+            </if>
+            <if test="record.callTraceCntt != null" >
+                call_trace_cntt = #{record.callTraceCntt,jdbcType=VARCHAR},
+            </if>
+            <if test="record.ivrKeyValue != null" >
+                ivr_key_value = #{record.ivrKeyValue,jdbcType=VARCHAR},
+            </if>
+            <if test="record.rcdCrtTime != null" >
+                rcd_crt_time = #{record.rcdCrtTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.rcdFileNm != null" >
+                rcd_file_nm = #{record.rcdFileNm,jdbcType=VARCHAR},
+            </if>
+            <if test="record.rcdFileSavePath != null" >
+                rcd_file_save_path = #{record.rcdFileSavePath,jdbcType=VARCHAR},
+            </if>
+            <if test="record.rcdFileSvrUrlPath != null" >
+                rcd_file_svr_url_path = #{record.rcdFileSvrUrlPath,jdbcType=VARCHAR},
+            </if>
+            <if test="record.rcdBgnTime != null" >
+                rcd_bgn_time = #{record.rcdBgnTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.rcdFinishTime != null" >
+                rcd_finish_time = #{record.rcdFinishTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.rcdTmlenSecCnt != null" >
+                rcd_tmlen_sec_cnt = #{record.rcdTmlenSecCnt,jdbcType=DECIMAL},
+            </if>
+            <if test="record.msServer != null" >
+                ms_server = #{record.msServer,jdbcType=VARCHAR},
+            </if>
+            <if test="record.connectState != null" >
+                connect_state = #{record.connectState,jdbcType=CHAR},
+            </if>
+            <if test="record.erOrgCallingNumId != null" >
+                er_org_calling_num_id = #{record.erOrgCallingNumId,jdbcType=BIGINT},
+            </if>
+            <if test="record.telephoneNumber != null" >
+                telephone_number = #{record.telephoneNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="record.taskCallingNum != null" >
+                task_calling_num = #{record.taskCallingNum,jdbcType=VARCHAR},
+            </if>
+            <if test="record.disconnectType != null" >
+                disconnect_type = #{record.disconnectType,jdbcType=TINYINT},
+            </if>
+            <if test="record.ringTime != null" >
+                ring_time = #{record.ringTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.areaCode != null" >
+                area_code = #{record.areaCode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.autoTaskId != null" >
+                auto_task_id = #{record.autoTaskId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userAlertTime != null" >
+                user_alert_time = #{record.userAlertTime,jdbcType=SMALLINT},
+            </if>
+            <if test="record.agentAlertTime != null" >
+                agent_alert_time = #{record.agentAlertTime,jdbcType=SMALLINT},
+            </if>
+            <if test="record.qualityExtractState != null" >
+                quality_extract_state = #{record.qualityExtractState,jdbcType=CHAR},
+            </if>
+            <if test="record.version != null" >
+                version = #{record.version,jdbcType=INTEGER},
+            </if>
+            <if test="record.erOrgName != null" >
+                er_org_name = #{record.erOrgName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.erOrgCode != null" >
+                er_org_code = #{record.erOrgCode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.spOrgName != null" >
+                sp_org_name = #{record.spOrgName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.spOrgCode != null" >
+                sp_org_code = #{record.spOrgCode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.seatRealName != null" >
+                seat_real_name = #{record.seatRealName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.seatCode != null" >
+                seat_code = #{record.seatCode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.taskName != null" >
+                task_name = #{record.taskName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.taskCode != null" >
+                task_code = #{record.taskCode,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update t_ct_touch
+        set touch_id = #{record.touchId,jdbcType=BIGINT},
+            crt_user_id = #{record.crtUserId,jdbcType=BIGINT},
+            crt_time = #{record.crtTime,jdbcType=TIMESTAMP},
+            crt_app_sys_id = #{record.crtAppSysId,jdbcType=VARCHAR},
+            modf_user_id = #{record.modfUserId,jdbcType=BIGINT},
+            modf_time = #{record.modfTime,jdbcType=TIMESTAMP},
+            modf_app_sys_id = #{record.modfAppSysId,jdbcType=VARCHAR},
+            samp_id = #{record.sampId,jdbcType=BIGINT},
+            task_id = #{record.taskId,jdbcType=BIGINT},
+            task_qualify_id = #{record.taskQualifyId,jdbcType=BIGINT},
+            seat_id = #{record.seatId,jdbcType=BIGINT},
+            cti_agent_id = #{record.ctiAgentId,jdbcType=VARCHAR},
+            sp_org_id = #{record.spOrgId,jdbcType=BIGINT},
+            er_org_id = #{record.erOrgId,jdbcType=BIGINT},
+            touch_mode_cd = #{record.touchModeCd,jdbcType=CHAR},
+            touch_bgn_time = #{record.touchBgnTime,jdbcType=TIMESTAMP},
+            touch_finish_time = #{record.touchFinishTime,jdbcType=TIMESTAMP},
+            call_seat_mark_cntt = #{record.callSeatMarkCntt,jdbcType=VARCHAR},
+            call_mark_cntt = #{record.callMarkCntt,jdbcType=VARCHAR},
+            op_agent_id = #{record.opAgentId,jdbcType=VARCHAR},
+            agent_dn = #{record.agentDn,jdbcType=VARCHAR},
+            service_direct = #{record.serviceDirect,jdbcType=VARCHAR},
+            calling_num = #{record.callingNum,jdbcType=VARCHAR},
+            called_num = #{record.calledNum,jdbcType=VARCHAR},
+            called_cust_num = #{record.calledCustNum,jdbcType=VARCHAR},
+            called_cust_name = #{record.calledCustName,jdbcType=VARCHAR},
+            orig_calling_num = #{record.origCallingNum,jdbcType=VARCHAR},
+            orig_called_num = #{record.origCalledNum,jdbcType=VARCHAR},
+            lnup_tmlen_sec_cnt = #{record.lnupTmlenSecCnt,jdbcType=DECIMAL},
+            ring_tmlen_sec_cnt = #{record.ringTmlenSecCnt,jdbcType=DECIMAL},
+            cnvst_tmlen_sec_cnt = #{record.cnvstTmlenSecCnt,jdbcType=DECIMAL},
+            onhook_type_cd = #{record.onhookTypeCd,jdbcType=VARCHAR},
+            call_trace_cntt = #{record.callTraceCntt,jdbcType=VARCHAR},
+            ivr_key_value = #{record.ivrKeyValue,jdbcType=VARCHAR},
+            rcd_crt_time = #{record.rcdCrtTime,jdbcType=TIMESTAMP},
+            rcd_file_nm = #{record.rcdFileNm,jdbcType=VARCHAR},
+            rcd_file_save_path = #{record.rcdFileSavePath,jdbcType=VARCHAR},
+            rcd_file_svr_url_path = #{record.rcdFileSvrUrlPath,jdbcType=VARCHAR},
+            rcd_bgn_time = #{record.rcdBgnTime,jdbcType=TIMESTAMP},
+            rcd_finish_time = #{record.rcdFinishTime,jdbcType=TIMESTAMP},
+            rcd_tmlen_sec_cnt = #{record.rcdTmlenSecCnt,jdbcType=DECIMAL},
+            ms_server = #{record.msServer,jdbcType=VARCHAR},
+            connect_state = #{record.connectState,jdbcType=CHAR},
+            er_org_calling_num_id = #{record.erOrgCallingNumId,jdbcType=BIGINT},
+            telephone_number = #{record.telephoneNumber,jdbcType=VARCHAR},
+            task_calling_num = #{record.taskCallingNum,jdbcType=VARCHAR},
+            disconnect_type = #{record.disconnectType,jdbcType=TINYINT},
+            ring_time = #{record.ringTime,jdbcType=TIMESTAMP},
+            area_code = #{record.areaCode,jdbcType=VARCHAR},
+            auto_task_id = #{record.autoTaskId,jdbcType=VARCHAR},
+            user_alert_time = #{record.userAlertTime,jdbcType=SMALLINT},
+            agent_alert_time = #{record.agentAlertTime,jdbcType=SMALLINT},
+            quality_extract_state = #{record.qualityExtractState,jdbcType=CHAR},
+            version = #{record.version,jdbcType=INTEGER},
+            er_org_name = #{record.erOrgName,jdbcType=VARCHAR},
+            er_org_code = #{record.erOrgCode,jdbcType=VARCHAR},
+            sp_org_name = #{record.spOrgName,jdbcType=VARCHAR},
+            sp_org_code = #{record.spOrgCode,jdbcType=VARCHAR},
+            seat_real_name = #{record.seatRealName,jdbcType=VARCHAR},
+            seat_code = #{record.seatCode,jdbcType=VARCHAR},
+            task_name = #{record.taskName,jdbcType=VARCHAR},
+            task_code = #{record.taskCode,jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.luying.pojo.TCtTouch" >
+        update t_ct_touch
+        <set >
+            <if test="crtUserId != null" >
+                crt_user_id = #{crtUserId,jdbcType=BIGINT},
+            </if>
+            <if test="crtTime != null" >
+                crt_time = #{crtTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="crtAppSysId != null" >
+                crt_app_sys_id = #{crtAppSysId,jdbcType=VARCHAR},
+            </if>
+            <if test="modfUserId != null" >
+                modf_user_id = #{modfUserId,jdbcType=BIGINT},
+            </if>
+            <if test="modfTime != null" >
+                modf_time = #{modfTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modfAppSysId != null" >
+                modf_app_sys_id = #{modfAppSysId,jdbcType=VARCHAR},
+            </if>
+            <if test="sampId != null" >
+                samp_id = #{sampId,jdbcType=BIGINT},
+            </if>
+            <if test="taskId != null" >
+                task_id = #{taskId,jdbcType=BIGINT},
+            </if>
+            <if test="taskQualifyId != null" >
+                task_qualify_id = #{taskQualifyId,jdbcType=BIGINT},
+            </if>
+            <if test="seatId != null" >
+                seat_id = #{seatId,jdbcType=BIGINT},
+            </if>
+            <if test="ctiAgentId != null" >
+                cti_agent_id = #{ctiAgentId,jdbcType=VARCHAR},
+            </if>
+            <if test="spOrgId != null" >
+                sp_org_id = #{spOrgId,jdbcType=BIGINT},
+            </if>
+            <if test="erOrgId != null" >
+                er_org_id = #{erOrgId,jdbcType=BIGINT},
+            </if>
+            <if test="touchModeCd != null" >
+                touch_mode_cd = #{touchModeCd,jdbcType=CHAR},
+            </if>
+            <if test="touchBgnTime != null" >
+                touch_bgn_time = #{touchBgnTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="touchFinishTime != null" >
+                touch_finish_time = #{touchFinishTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="callSeatMarkCntt != null" >
+                call_seat_mark_cntt = #{callSeatMarkCntt,jdbcType=VARCHAR},
+            </if>
+            <if test="callMarkCntt != null" >
+                call_mark_cntt = #{callMarkCntt,jdbcType=VARCHAR},
+            </if>
+            <if test="opAgentId != null" >
+                op_agent_id = #{opAgentId,jdbcType=VARCHAR},
+            </if>
+            <if test="agentDn != null" >
+                agent_dn = #{agentDn,jdbcType=VARCHAR},
+            </if>
+            <if test="serviceDirect != null" >
+                service_direct = #{serviceDirect,jdbcType=VARCHAR},
+            </if>
+            <if test="callingNum != null" >
+                calling_num = #{callingNum,jdbcType=VARCHAR},
+            </if>
+            <if test="calledNum != null" >
+                called_num = #{calledNum,jdbcType=VARCHAR},
+            </if>
+            <if test="calledCustNum != null" >
+                called_cust_num = #{calledCustNum,jdbcType=VARCHAR},
+            </if>
+            <if test="calledCustName != null" >
+                called_cust_name = #{calledCustName,jdbcType=VARCHAR},
+            </if>
+            <if test="origCallingNum != null" >
+                orig_calling_num = #{origCallingNum,jdbcType=VARCHAR},
+            </if>
+            <if test="origCalledNum != null" >
+                orig_called_num = #{origCalledNum,jdbcType=VARCHAR},
+            </if>
+            <if test="lnupTmlenSecCnt != null" >
+                lnup_tmlen_sec_cnt = #{lnupTmlenSecCnt,jdbcType=DECIMAL},
+            </if>
+            <if test="ringTmlenSecCnt != null" >
+                ring_tmlen_sec_cnt = #{ringTmlenSecCnt,jdbcType=DECIMAL},
+            </if>
+            <if test="cnvstTmlenSecCnt != null" >
+                cnvst_tmlen_sec_cnt = #{cnvstTmlenSecCnt,jdbcType=DECIMAL},
+            </if>
+            <if test="onhookTypeCd != null" >
+                onhook_type_cd = #{onhookTypeCd,jdbcType=VARCHAR},
+            </if>
+            <if test="callTraceCntt != null" >
+                call_trace_cntt = #{callTraceCntt,jdbcType=VARCHAR},
+            </if>
+            <if test="ivrKeyValue != null" >
+                ivr_key_value = #{ivrKeyValue,jdbcType=VARCHAR},
+            </if>
+            <if test="rcdCrtTime != null" >
+                rcd_crt_time = #{rcdCrtTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="rcdFileNm != null" >
+                rcd_file_nm = #{rcdFileNm,jdbcType=VARCHAR},
+            </if>
+            <if test="rcdFileSavePath != null" >
+                rcd_file_save_path = #{rcdFileSavePath,jdbcType=VARCHAR},
+            </if>
+            <if test="rcdFileSvrUrlPath != null" >
+                rcd_file_svr_url_path = #{rcdFileSvrUrlPath,jdbcType=VARCHAR},
+            </if>
+            <if test="rcdBgnTime != null" >
+                rcd_bgn_time = #{rcdBgnTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="rcdFinishTime != null" >
+                rcd_finish_time = #{rcdFinishTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="rcdTmlenSecCnt != null" >
+                rcd_tmlen_sec_cnt = #{rcdTmlenSecCnt,jdbcType=DECIMAL},
+            </if>
+            <if test="msServer != null" >
+                ms_server = #{msServer,jdbcType=VARCHAR},
+            </if>
+            <if test="connectState != null" >
+                connect_state = #{connectState,jdbcType=CHAR},
+            </if>
+            <if test="erOrgCallingNumId != null" >
+                er_org_calling_num_id = #{erOrgCallingNumId,jdbcType=BIGINT},
+            </if>
+            <if test="telephoneNumber != null" >
+                telephone_number = #{telephoneNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="taskCallingNum != null" >
+                task_calling_num = #{taskCallingNum,jdbcType=VARCHAR},
+            </if>
+            <if test="disconnectType != null" >
+                disconnect_type = #{disconnectType,jdbcType=TINYINT},
+            </if>
+            <if test="ringTime != null" >
+                ring_time = #{ringTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="areaCode != null" >
+                area_code = #{areaCode,jdbcType=VARCHAR},
+            </if>
+            <if test="autoTaskId != null" >
+                auto_task_id = #{autoTaskId,jdbcType=VARCHAR},
+            </if>
+            <if test="userAlertTime != null" >
+                user_alert_time = #{userAlertTime,jdbcType=SMALLINT},
+            </if>
+            <if test="agentAlertTime != null" >
+                agent_alert_time = #{agentAlertTime,jdbcType=SMALLINT},
+            </if>
+            <if test="qualityExtractState != null" >
+                quality_extract_state = #{qualityExtractState,jdbcType=CHAR},
+            </if>
+            <if test="version != null" >
+                version = #{version,jdbcType=INTEGER},
+            </if>
+            <if test="erOrgName != null" >
+                er_org_name = #{erOrgName,jdbcType=VARCHAR},
+            </if>
+            <if test="erOrgCode != null" >
+                er_org_code = #{erOrgCode,jdbcType=VARCHAR},
+            </if>
+            <if test="spOrgName != null" >
+                sp_org_name = #{spOrgName,jdbcType=VARCHAR},
+            </if>
+            <if test="spOrgCode != null" >
+                sp_org_code = #{spOrgCode,jdbcType=VARCHAR},
+            </if>
+            <if test="seatRealName != null" >
+                seat_real_name = #{seatRealName,jdbcType=VARCHAR},
+            </if>
+            <if test="seatCode != null" >
+                seat_code = #{seatCode,jdbcType=VARCHAR},
+            </if>
+            <if test="taskName != null" >
+                task_name = #{taskName,jdbcType=VARCHAR},
+            </if>
+            <if test="taskCode != null" >
+                task_code = #{taskCode,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where touch_id = #{touchId,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.luying.pojo.TCtTouch" >
+        update t_ct_touch
+        set crt_user_id = #{crtUserId,jdbcType=BIGINT},
+            crt_time = #{crtTime,jdbcType=TIMESTAMP},
+            crt_app_sys_id = #{crtAppSysId,jdbcType=VARCHAR},
+            modf_user_id = #{modfUserId,jdbcType=BIGINT},
+            modf_time = #{modfTime,jdbcType=TIMESTAMP},
+            modf_app_sys_id = #{modfAppSysId,jdbcType=VARCHAR},
+            samp_id = #{sampId,jdbcType=BIGINT},
+            task_id = #{taskId,jdbcType=BIGINT},
+            task_qualify_id = #{taskQualifyId,jdbcType=BIGINT},
+            seat_id = #{seatId,jdbcType=BIGINT},
+            cti_agent_id = #{ctiAgentId,jdbcType=VARCHAR},
+            sp_org_id = #{spOrgId,jdbcType=BIGINT},
+            er_org_id = #{erOrgId,jdbcType=BIGINT},
+            touch_mode_cd = #{touchModeCd,jdbcType=CHAR},
+            touch_bgn_time = #{touchBgnTime,jdbcType=TIMESTAMP},
+            touch_finish_time = #{touchFinishTime,jdbcType=TIMESTAMP},
+            call_seat_mark_cntt = #{callSeatMarkCntt,jdbcType=VARCHAR},
+            call_mark_cntt = #{callMarkCntt,jdbcType=VARCHAR},
+            op_agent_id = #{opAgentId,jdbcType=VARCHAR},
+            agent_dn = #{agentDn,jdbcType=VARCHAR},
+            service_direct = #{serviceDirect,jdbcType=VARCHAR},
+            calling_num = #{callingNum,jdbcType=VARCHAR},
+            called_num = #{calledNum,jdbcType=VARCHAR},
+            called_cust_num = #{calledCustNum,jdbcType=VARCHAR},
+            called_cust_name = #{calledCustName,jdbcType=VARCHAR},
+            orig_calling_num = #{origCallingNum,jdbcType=VARCHAR},
+            orig_called_num = #{origCalledNum,jdbcType=VARCHAR},
+            lnup_tmlen_sec_cnt = #{lnupTmlenSecCnt,jdbcType=DECIMAL},
+            ring_tmlen_sec_cnt = #{ringTmlenSecCnt,jdbcType=DECIMAL},
+            cnvst_tmlen_sec_cnt = #{cnvstTmlenSecCnt,jdbcType=DECIMAL},
+            onhook_type_cd = #{onhookTypeCd,jdbcType=VARCHAR},
+            call_trace_cntt = #{callTraceCntt,jdbcType=VARCHAR},
+            ivr_key_value = #{ivrKeyValue,jdbcType=VARCHAR},
+            rcd_crt_time = #{rcdCrtTime,jdbcType=TIMESTAMP},
+            rcd_file_nm = #{rcdFileNm,jdbcType=VARCHAR},
+            rcd_file_save_path = #{rcdFileSavePath,jdbcType=VARCHAR},
+            rcd_file_svr_url_path = #{rcdFileSvrUrlPath,jdbcType=VARCHAR},
+            rcd_bgn_time = #{rcdBgnTime,jdbcType=TIMESTAMP},
+            rcd_finish_time = #{rcdFinishTime,jdbcType=TIMESTAMP},
+            rcd_tmlen_sec_cnt = #{rcdTmlenSecCnt,jdbcType=DECIMAL},
+            ms_server = #{msServer,jdbcType=VARCHAR},
+            connect_state = #{connectState,jdbcType=CHAR},
+            er_org_calling_num_id = #{erOrgCallingNumId,jdbcType=BIGINT},
+            telephone_number = #{telephoneNumber,jdbcType=VARCHAR},
+            task_calling_num = #{taskCallingNum,jdbcType=VARCHAR},
+            disconnect_type = #{disconnectType,jdbcType=TINYINT},
+            ring_time = #{ringTime,jdbcType=TIMESTAMP},
+            area_code = #{areaCode,jdbcType=VARCHAR},
+            auto_task_id = #{autoTaskId,jdbcType=VARCHAR},
+            user_alert_time = #{userAlertTime,jdbcType=SMALLINT},
+            agent_alert_time = #{agentAlertTime,jdbcType=SMALLINT},
+            quality_extract_state = #{qualityExtractState,jdbcType=CHAR},
+            version = #{version,jdbcType=INTEGER},
+            er_org_name = #{erOrgName,jdbcType=VARCHAR},
+            er_org_code = #{erOrgCode,jdbcType=VARCHAR},
+            sp_org_name = #{spOrgName,jdbcType=VARCHAR},
+            sp_org_code = #{spOrgCode,jdbcType=VARCHAR},
+            seat_real_name = #{seatRealName,jdbcType=VARCHAR},
+            seat_code = #{seatCode,jdbcType=VARCHAR},
+            task_name = #{taskName,jdbcType=VARCHAR},
+            task_code = #{taskCode,jdbcType=VARCHAR}
+        where touch_id = #{touchId,jdbcType=BIGINT}
+    </update>
+</mapper>
